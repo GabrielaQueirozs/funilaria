@@ -98,12 +98,14 @@ frmClient.addEventListener('keydown', teclaEnter)
 // ============================================================
 // == CRUD Create/Update ======================================
 
+// Capturar os botões
+const btnCreate = document.getElementById('btnCreate')
+const btnUpdate = document.getElementById('btnUpdate')
+
 //Evento associado ao botão submit (uso das validações do html)
 frmClient.addEventListener('submit', async (event) => {
-    //evitar o comportamento padrão do submit que é enviar os dados do formulário e reiniciar o documento html
     event.preventDefault()
-    // Teste importante (recebimento dos dados do formuláro - passo 1 do fluxo)
-    console.log(nameClient.value, cpfClient.value, emailClient.value, phoneClient.value, cepClient.value, addressClient.value, numberClient.value, complementClient.value, neighborhoodClient.value, cityClient.value, ufClient.value)
+
     //Criar um objeto para armazenar os dados do cliente antes de enviar ao main
     const client = {
         nameCli: nameClient.value,
@@ -118,12 +120,22 @@ frmClient.addEventListener('submit', async (event) => {
         cityCli: cityClient.value,
         ufCli: ufClient.value
     }
-    // Enviar ao main o objeto client - (Passo 2: fluxo)
-    // uso do preload.js
-    api.newClient(client)
+
+    // Verifica qual botão foi clicado
+    const btnClicado = document.activeElement.id
+
+    if (btnClicado === 'btnCreate') {
+        // Adicionar novo cliente
+        api.newClient(client)
+    } else if (btnClicado === 'btnUpdate') {
+        // Editar cliente → precisa enviar o id também
+        client.idCli = id.value
+        api.updateClient(client)
+    }
 })
 
 // == Fim CRUD Create/Update ==================================
+
 // ============================================================
 
 
@@ -211,9 +223,17 @@ function excluirCliente() {
 // ============================================================
 // == Reset form ==============================================
 function resetForm() {
-    // Limpar os campos e resetar o formulário com as configurações pré definidas
-    location.reload()
+    frmClient.reset()
+    id.value = ""
+    // Ativar botão Adicionar
+    btnCreate.disabled = false
+    // Desativar botões Editar e Excluir
+    btnUpdate.disabled = true
+    btnDelete.disabled = true
+    // Foco no campo de busca
+    foco.focus()
 }
+
 
 // Recebimento do pedido do main para resetar o form
 api.resetForm((args) => {

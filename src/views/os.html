@@ -38,7 +38,16 @@
                         <img src="../public/img/search.png" alt="lupa" width="20">
                     </span>
                 </div>
-            </div>
+            <!-- Lista de sugestões - estilo Google -->
+            <ul id="viewListSuggestion" class="list-group position-absolute w-100"></ul>     
+            </div>    
+        
+            <!-- Id -->
+            <div class="col-md-4">
+                <label for="inputIdClient" class="form-label">Id do cliente</label>
+                <input type="text" class="form-control" id="inputIdClient" spellcheck="false" maxlength="30" disabled>
+            </div> 
+            
 
             <!-- Nome -->
             <div class="col-md-5">
@@ -49,18 +58,12 @@
             <!-- Telefone -->
             <div class="col-md-3">
                 <label for="inputPhoneClient" class="form-label">Telefone</label>
-                <input type="text" class="form-control" id="inputPhoneClient" spellcheck="false" maxlength="15"
-                    disabled>
+                <input type="text" class="form-control" id="inputPhoneClient" spellcheck="false" maxlength="15" disabled>
             </div>
 
-            <!-- CPF -->
-            <div class="col-md-4">
-                <label for="inputCPFClient" class="form-label">CPF</label>
-                <input type="text" class="form-control" id="inputCPFClient" spellcheck="false" maxlength="15" disabled>
-            </div>
-
+            <input type="text" id="idClient"> <!-- oculto -->
             <!-- Linha -->
-            <hr class="mt-4 border border-secondary border -1">
+            <hr class="mt-4 border border-secondary border-1">
 
             <!-- Status -->
             <div class="col-md-4">
@@ -74,57 +77,61 @@
                     <option>Cancelada</option>
                 </select>
             </div>
-            
+
             <div class="col-md-8">
-                <label class="form-label" id="inputEquipamento">Modelo do Carro / Cor</label>
+                <label for="inputEquipamento" class="form-label">Modelo do Carro / Cor</label>
                 <input type="text" class="form-control" id="inputEquipamento" maxlength="30" required>
-            </div>
-            <div class="col-md-3">
-                <label class="form-label" id="inputSerial">Marca</label>
-                <input type="text" class="form-control" id="inputSerial" maxlength="20" >
             </div>
 
             <div class="col-md-3">
-                <label class="form-label" id="inputSerial">Placa do carro</label>
-                <input type="text" class="form-control" id="inputSerial" maxlength="20" >
+                <label for="inputMarcaCarro" class="form-label">Marca</label>
+                <input type="text" class="form-control" id="inputMarcaCarro" maxlength="20">
+            </div>
+
+            <div class="col-md-3">
+                <label for="inputPlacaCarro" class="form-label">Placa do carro</label>
+                <input type="text" class="form-control" id="inputPlacaCarro" maxlength="20">
             </div>
 
             <div class="col-md-4">
-                <label class="form-label" id="inputDefeito"> Serviço</label>
+                <label for="inputDefeito" class="form-label">Serviço</label>
                 <input type="text" class="form-control" id="inputDefeito" maxlength="80" required>
             </div>
 
             <div class="col-md-3">
-                <label class="form-label" id="inputTecnico">Funcionário</label>
-                <input type="text" class="form-control" id="inputTecnico" maxlength="20" >
+                <label for="inputTecnico" class="form-label">Funcionário</label>
+                <input type="text" class="form-control" id="inputTecnico" maxlength="20">
             </div>
 
             <div class="col-md-4">
-                <label class="form-label" id="inputDiagnostico">Peças</label>
+                <label for="inputDiagnostico" class="form-label">Peças</label>
                 <input type="text" class="form-control" id="inputDiagnostico" maxlength="60">
             </div>
-            
+
             <div class="col-md-5">
-                <label class="form-label" id="inputPecas">Observações</label>
+                <label for="inputpecas" class="form-label">Observações</label>
                 <input type="text" class="form-control" id="inputpecas" maxlength="80">
             </div>
 
             <div class="col-md-3">
-                <label class="form-label" id="inputValor">Orçamento</label>
-                <input type="text" class="form-control" id="inputValor" maxlength="20" >
+                <label for="inputValor" class="form-label">Orçamento</label>
+                <input type="text" class="form-control" id="inputValor" maxlength="20">
             </div>
 
+            <!-- Botões -->
             <div class="mt-4 d-flex justify-content-center gap-1">
-                <button type="button" class="btn btn-success">Gerar OS</button>
-                <button type="button" class="btn btn-primary">Buscar OS</button>
-                <button type="button" class="btn btn-warning">Editar OS</button>
-                <button type="button" class="btn btn-danger">Excluir OS</button>
-                <button type="button" class="btn btn-secondary">Imprimir OS</button>
+                <button type="button" class="btn btn-success" id="btn-create">Gerar OS</button>
+                <button type="button" class="btn btn-primary" id="btn-search">Buscar OS</button>
+                <button type="button" class="btn btn-warning" id="btn-update">Editar OS</button>
+                <button type="button" class="btn btn-danger" id="btn-delete">Excluir OS</button>
+                <button type="button" class="btn btn-secondary" id="btn-print">Imprimir OS</button>
+            </div>
         </form>
     </div>
 
     <!-- Bootstrap -->
     <script src="../public/js/bootstrap.min.js"></script>
+    <script src="../views/rendereros.js"></script>
 </body>
 
 </html>
