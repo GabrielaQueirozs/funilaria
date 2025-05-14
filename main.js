@@ -188,7 +188,7 @@ const template = [
                 click: () => relatorioOsAberta()
             },
             {
-                label: 'OS concluídas',
+                label: 'OS Finalizadas',
                 click: () => relatorioOsConcluida()
             }
         ]
@@ -731,7 +731,7 @@ ipcMain.on('update-client', async (event, client) => {
 // ============================================================
 // == Buscar OS ===============================================
 
-ipcMain.on('search-os', (event) => {
+ipcMain.on('search-os',async (event) => {
     //console.log("teste: busca OS")
     prompt({
         title: 'Buscar OS',
@@ -745,7 +745,6 @@ ipcMain.on('search-os', (event) => {
     }).then((result) => {
         if (result !== null) {
             console.log(result)
-            //buscar a os no banco pesquisando pelo valor do result (número da OS)
 
         }
     })
