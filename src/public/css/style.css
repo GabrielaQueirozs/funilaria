@@ -4,8 +4,10 @@
 .button img {
     margin: 50px 15px 25px 15px;
     padding: 5px;
-    border: 1px solid #ff0707;
+    border: 1px solid #920000;
+    border-radius: 20px;
     cursor: pointer;
+    background-color:#c0403b;
 }
 
 /* Botão reset */
@@ -21,8 +23,8 @@
 /* logo */
 #logo {
     position: fixed;
-    bottom: 40px;
-    right: 5px;
+    bottom: 55px;
+    right: 10px;
     border: none;
     cursor: none;
 }

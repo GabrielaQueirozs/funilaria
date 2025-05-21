@@ -29,7 +29,7 @@ const createWindow = () => {
     win = new BrowserWindow({
         width: 800,
         height: 600,
-        icon: './src/public/img/icone.png',
+        icon: './src/public/img/LuxCar.png',
         //autoHideMenuBar: true,
         //minimizable: false,
         resizable: false,
@@ -57,7 +57,7 @@ function aboutWindow() {
         about = new BrowserWindow({
             width: 360,
             height: 250,
-            icon: './src/public/img/icone.png',
+            icon: './src/public/img/LuxCar.png',
             autoHideMenuBar: true,
             resizable: false,
             minimizable: false,
@@ -582,7 +582,76 @@ async function relatorioOsConcluida() {
 }
 
 // == Fim - relatório de OS aberta =============================
+// =========================================================
+
+
+
+
+////////////////////// gerar os///////////////
+
+
+
+
+// GERAR OS 
+// Validação de busca (preenchimento obrigatório Id Cliente-OS)
+ipcMain.on('validate-client', (event) => {
+    dialog.showMessageBox({
+        type: 'warning',
+        title: "Aviso!",
+        message: "É obrigatório vincular o cliente na Ordem de Serviço",
+        buttons: ['OK']
+    }).then((result) => {
+        //ação ao pressionar o botão (result = 0)
+        if (result.response === 0) {
+            event.reply('set-search')
+        }
+    })
+})
+
+ipcMain.on('new-os', async (event, os) => {
+    //importante! teste de recebimento dos dados da os (passo 2)
+    console.log(os)
+    // Cadastrar a estrutura de dados no banco de dados MongoDB
+    try {
+        // criar uma nova de estrutura de dados usando a classe modelo. Atenção! Os atributos precisam ser idênticos ao modelo de dados OS.js e os valores são definidos pelo conteúdo do objeto os
+        const newOS = new osModel({
+            idCliente: os.idClient_OS,
+            statusOS: os.stat_OS,
+            computador: os.computer_OS,
+            serie: os.serial_OS,
+            problema: os.problem_OS,
+            observacao: os.obs_OS,
+            tecnico: os.specialist_OS,
+            diagnostico: os.diagnosis_OS,
+            pecas: os.parts_OS,
+            valor: os.total_OS
+        })
+        // salvar os dados da OS no banco de dados
+        await newOS.save()
+        // Mensagem de confirmação
+        dialog.showMessageBox({
+            //customização
+            type: 'info',
+            title: "Aviso",
+            message: "OS gerada com sucesso",
+            buttons: ['OK']
+        }).then((result) => {
+            //ação ao pressionar o botão (result = 0)
+            if (result.response === 0) {
+                //enviar um pedido para o renderizador limpar os campos e resetar as configurações pré definidas (rótulo 'reset-form' do preload.js
+                event.reply('reset-form')
+            }
+        })
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+// == Fim - CRUD Create - Gerar OS ===========================
 // ============================================================
+
+
+
 
 
 // ============================================================
@@ -772,3 +841,5 @@ ipcMain.on('search-clients', async (event) => {
 
 // == Fim - Busca Cliente (estilo Google) =====================
 // ============================================================
+
+
