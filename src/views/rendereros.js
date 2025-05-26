@@ -3,7 +3,7 @@ let nomeCliente = document.getElementById('inputNameClient')
 let foneCliente = document.getElementById('inputPhoneClient')
 let idClient = document.getElementById('inputIdClient')
 let statusOS = document.getElementById('osStatus')
-let modeloCarro = document.getElementById('inputEquipamento')
+let modeloCarro = document.getElementById('inputModeloDoCarro')
 let marcaCarro = document.getElementById('inputMarcaCarro') // corrigido
 let placaCarro = document.getElementById('inputPlacaCarro') // corrigido
 let servico = document.getElementById('inputDefeito')
@@ -37,6 +37,58 @@ btnGerarOS.addEventListener('click', () => {
     console.log(ordemServico) // TESTE — importante
     api.newOS(ordemServico)
 })
+
+
+
+
+
+// ============================================================
+// == Buscar OS - CRUD Read ===================================
+
+function findOS() {
+    api.searchOS()
+}
+
+api.renderOS((event, dataOS) => {
+    console.log(dataOS)
+    const os = JSON.parse(dataOS)
+    // preencher os campos com os dados da OS
+    idOS.value = os._id
+    // formatar data:
+    const data = new Date(os.dataEntrada)
+    const formatada = data.toLocaleString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+    })
+    dateOS.value = formatada
+    idClient.value = os.idCliente
+    statusOS.value = os.statusOS
+    computer.value = os.nomeCliente
+    serial.value = os.foneCliente
+    problem.value = os.cpfCliente
+    obs.value = os.modeloCarro
+    specialist.value = os.marcaCarro
+    diagnosis.value = os.placaCarro
+    parts.value = os.servico
+    total.value = os.funcionario
+    total.value = os.pecas
+    total.value = os.observacoes
+    total.value = os.orcamento
+
+    // desativar o botão adicionar
+    btnCreate.disabled = true
+    // ativar os botões editar e excluir
+    btnUpdate.disabled = false
+    btnDelete.disabled = false    
+})
+
+// == Fim - Buscar OS - CRUD Read =============================
+// ============================================================
+
 
 // ==================================================
 // == Busca avançada - estilo Google ================
