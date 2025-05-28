@@ -15,7 +15,7 @@
 
 <body>
     <div class="container">
-        <form class="mt-2 row g-3">
+        <form class="mt-2 row g-3" id="frmOS">
 
             <!-- OS -->
             <div class="col-md-4">
@@ -120,11 +120,11 @@
 
             <!-- Botões -->
             <div class="mt-4 d-flex justify-content-center gap-1">
-                <button type="button" class="btn btn-success" id="btn-create">Gerar OS 🟩</button>
+                <button type="submit" class="btn btn-success" id="btnGerarOS">Gerar OS 🟩</button>
                 <button type="button" class="btn btn-primary" id="btn-search" onclick="findOS()">Buscar OS 🟦 </button>
-                <button type="button" class="btn btn-warning" id="btn-update">Editar OS 🟨</button>
-                <button type="button" class="btn btn-danger" id="btn-delete" onclick="removeOS()">Excluir OS 🟥</button>
-                <button type="button" class="btn btn-secondary" id="btn-print">Imprimir OS ⬛</button>
+                <button type="submit" class="btn btn-warning" id="btnUpdate">Editar OS 🟨</button>
+                <button type="button" class="btn btn-danger" id="btnDelete" onclick="removeOS()">Excluir OS 🟥</button>
+                <button type="button" class="btn btn-secondary" id="btn-print" onclick="generateOS()">Imprimir OS ⬛</button>
             </div>
         </form>
     </div>
